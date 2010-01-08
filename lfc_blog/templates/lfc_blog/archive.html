@@ -1,0 +1,59 @@
+{% extends "lfc/base.html" %}
+{% load i18n %}
+{% load lfc_tags %}
+{% load portlets_tags %}
+{% load tagging_tags %}
+{% load pagination_tags %}
+{% load comments %}
+
+{% block content %}
+    <h1 class="news">{% trans 'Entries for' %} {{ month }} {{ year }}</h1>
+
+    {% for entry in entries %}
+        <div class="blog-entry">
+            <h2 class="blog-entry {% if not forloop.first %}heading-middle{% endif %}">
+                <a href="{{entry.get_absolute_url}}">{{ entry.title }}</a>
+            </h2>
+            <div class="blog-by-line">
+                {% trans 'Posted on' %}
+                {{entry.publication_date|date:"d.m.Y"}}
+                {% trans 'by' %}
+                {% if lfc_object.creator.last_name %}
+                    <span>{{ entry.creator.first_name }} {{ entry.creator.last_name }}</span>
+                {% else %}
+                    <span>{{ entry.creator.username }}</span>
+                {% endif %}                
+                {% tags_for_object entry as tag_list %}
+
+                {% if tag_list%}
+                    {% trans 'within' %}
+                    {% for tag in tag_list %}
+                        <a href="{% url page_tag_detail entry.slug tag %}">
+                            {{ tag }}</a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                {% get_comment_count for entry as comment_count %}
+                |
+                {% ifequal comment_count 1  %}
+                    <a href="{{ entry.get_absolute_url }}#comments">{% trans 'One comment' %}</a>
+                {% else %}
+                    <a href="{{ entry.get_absolute_url }}#comments">{{comment_count}} {% trans 'comments' %}</a>
+                {% endifequal %}
+            </div>
+
+            {% if entry.get_image %}
+                <img class="left"
+                     src="{{ entry.get_image.image.url_200x200 }}"
+                     alt="{{ entry.get_image.image.title }}"
+                     title="{{ entry.get_image.image.title }}" />
+            {% endif %}
+
+            <div>
+                {{entry.text|safe}}
+            </div>			
+        </div>
+        <br clear="all" />
+
+    {% endfor %}
+{% endblock %}

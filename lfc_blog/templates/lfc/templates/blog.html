@@ -1,0 +1,70 @@
+{% extends "lfc/base.html" %}
+{% load i18n %}
+{% load lfc_tags %}
+{% load portlets_tags %}
+{% load tagging_tags %}
+{% load pagination_tags %}
+{% load comments %}
+
+{% block content %}
+    {% if lfc_object.get_title %}
+        <h1 class="first-heading">{{ lfc_object.get_title }}</h1>
+    {% endif %}
+
+    {% autopaginate sub_objects %}
+
+    <div class="pagination-top">
+        {% paginate %}
+    </div>
+        
+    {{ lfc_object.text|safe }}
+    
+    {% for sub_obj in sub_objects %}
+        <div class="blog-entry">
+            <h2 class="blog-entry"
+                {% if not forloop.first %}class="heading-middle"{% endif %}>
+                <a href="{{sub_obj.get_absolute_url}}">{{sub_obj.title}}</a>
+            </h2>
+            <div class="blog-by-line">
+                {% trans 'Posted on' %}
+                {{ sub_obj.publication_date|date:"d.m.Y" }}
+                {% trans 'by' %}
+                {% if sub_obj.creator.last_name %}
+                    <span>{{ sub_obj.creator.first_name }} {{ sub_obj.creator.last_name }}</span>
+                {% else %}
+                    <span>{{ sub_obj.creator.username }}</span>
+                {% endif %}                
+                {% tags_for_object sub_obj as tag_list %}
+
+                {% if tag_list %}
+                    {% trans 'within' %}
+                    {% for tag in tag_list %}
+                        <a href="{% url lfc_blog_tag_list lfc_object.slug tag %}">
+                            {{ tag }}</a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                {% get_comment_count for sub_obj as comment_count %}
+                |
+                {% ifequal comment_count 1  %}
+                    <a href="{{ sub_obj.get_absolute_url }}#comments">{% trans 'One comment' %}</a>
+                {% else %}
+                    <a href="{{ sub_obj.get_absolute_url }}#comments">{{comment_count}} {% trans 'comments' %}</a>
+                {% endifequal %}
+            </div>
+
+            {% if sub_obj.get_image %}
+                <img class="left"
+                     src="{{ sub_obj.get_image.image.url_200x200 }}"
+                     alt="{{ sub_obj.get_image.image.title }}"
+                     title="{{ sub_obj.get_image.image.title }}" />
+            {% endif %}
+
+            <div>
+                {{sub_obj.text|safe}}
+            </div>
+            <br clear="both">
+
+        </div>
+    {% endfor %}
+{% endblock %}

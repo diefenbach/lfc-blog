@@ -1,0 +1,94 @@
+{% extends "lfc/base.html" %}
+{% load i18n %}
+{% load lfc_tags %}
+{% load portlets_tags %}
+{% load tagging_tags %}
+{% load comments %}
+
+{% block content %}
+    {% if lfc_object.display_title %}
+        <h1 class="blog-entry">{{ lfc_object.title }}</h1>
+    {% endif %}
+
+    <div class="blog-by-line">
+        {% trans 'Posted on' %}
+        {{ lfc_object.publication_date|date:"d.m.Y" }}
+        {% trans 'by' %}
+        {% if lfc_object.creator.last_name %}
+            <span>{{ lfc_object.creator.first_name }} {{ lfc_object.creator.last_name }}</span>
+        {% else %}
+            <span>{{ lfc_object.creator.username }}</span>
+        {% endif %}                
+        {% tags_for_object lfc_object as tag_list %}
+
+        {% if tag_list %}
+            {% trans 'within' %}
+            {% for tag in tag_list %}
+                <a href="{% url lfc_blog_tag_list lfc_object.parent.slug tag %}">
+                    {{ tag }}</a>{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% get_comment_count for lfc_object as comment_count %}
+        |
+        {% ifequal comment_count 1  %}
+            <a href="{{ lfc_object.get_absolute_url }}#comments">{% trans 'One comment' %}</a>
+        {% else %}
+            <a href="{{ lfc_object.get_absolute_url }}#comments">{{comment_count}} {% trans 'comments' %}</a>
+        {% endifequal %}
+    </div>
+
+    <div class="blog-entry">
+        {% if lfc_object.get_image %}
+            <a href="{{ lfc_object.get_image.image.url_600x600 }}"
+               class="photo-image"
+               title="{{ lfc_object.get_image.title }}">
+                <img class="left"
+                     src="{{ lfc_object.get_image.image.url_200x200 }}"
+                     alt="{{ lfc_object.get_image.image.title }}"
+                     title="{{ lfc_object.get_image.image.title }}" />
+            </a>
+        {% endif %}
+        <div>
+            {{ lfc_object.text|safe }}
+        </div>
+    </div>
+
+    <div class="previous-next-links">
+        {# {% previous_next lfc_object %} #}
+    </div>
+{% endblock %}
+
+{% block comments %}
+    {% get_comment_list for lfc_object as comment_list %}
+    {% if comment_list %}
+        <h2 class="underlined">
+            <a name="comments">{% trans 'Comments' %}</a>
+        </h2>
+
+        {% for comment in comment_list %}
+            <div class="comment">
+                <div class="name">
+                    {{ forloop.counter }}.
+                    {% if comment.url %}
+                        <a target="_blank" href="{{ comment.url }}">
+                            {{ comment.name }}
+                        </a>
+                    {% else %}
+                        {{ comment.name }}
+                    {% endif %}
+                    {{ comment.submit_date|date:"d.m.Y - H:i" }}
+                </div>
+                <div class="comment-text">
+                    {{ comment.comment }}
+                </div>
+            </div>
+        {% endfor %}
+
+    {% endif %}
+
+    {% if lfc_object.are_comments_allowed %}
+        <h2 class="underlined">{% trans 'Leave a comment' %}</h2>
+        {% render_comment_form for lfc_object %}
+    {% endif %}
+{% endblock %}
