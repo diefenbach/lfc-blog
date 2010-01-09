@@ -1,18 +1,12 @@
 What is it?
 ===========
 
-Features:
-=========
-
-Documentation
-=============
-
-For more documentation please visit: http://packages.python.org/django-lfc/
+A simple Blog for `LFC <http://pypi.python.org/pypi/django-lfc/>`
 
 Changes
 =======
 
-0.1.0 ()
+0.1.0 alpha 1 ()
 ------------------
 
 * Initial public release

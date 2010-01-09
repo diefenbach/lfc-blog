@@ -58,37 +58,3 @@
         {# {% previous_next lfc_object %} #}
     </div>
 {% endblock %}
-
-{% block comments %}
-    {% get_comment_list for lfc_object as comment_list %}
-    {% if comment_list %}
-        <h2 class="underlined">
-            <a name="comments">{% trans 'Comments' %}</a>
-        </h2>
-
-        {% for comment in comment_list %}
-            <div class="comment">
-                <div class="name">
-                    {{ forloop.counter }}.
-                    {% if comment.url %}
-                        <a target="_blank" href="{{ comment.url }}">
-                            {{ comment.name }}
-                        </a>
-                    {% else %}
-                        {{ comment.name }}
-                    {% endif %}
-                    {{ comment.submit_date|date:"d.m.Y - H:i" }}
-                </div>
-                <div class="comment-text">
-                    {{ comment.comment }}
-                </div>
-            </div>
-        {% endfor %}
-
-    {% endif %}
-
-    {% if lfc_object.are_comments_allowed %}
-        <h2 class="underlined">{% trans 'Leave a comment' %}</h2>
-        {% render_comment_form for lfc_object %}
-    {% endif %}
-{% endblock %}

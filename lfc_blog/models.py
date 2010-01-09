@@ -18,6 +18,7 @@ from portlets.utils import register_portlet
 
 # lfc imports
 from lfc.utils.registration import register_content_type
+from lfc.utils.registration import register_sub_type_to
 from lfc.fields.autocomplete import AutoCompleteTagInput
 from lfc.models import BaseContent
 
@@ -133,3 +134,6 @@ register_portlet(BlogPortlet, "Blog")
 # Register objects
 register_content_type(obj = Blog, name = "Blog", sub_types = ["BlogEntry"], templates=["Blog"], default_template="Blog")
 register_content_type(obj = BlogEntry, name = "Blog Entry", templates=["Blog Entry"], default_template="Blog Entry")
+
+# Register Blog as a sub type of Page
+register_sub_type_to("Page", obj=Blog)
