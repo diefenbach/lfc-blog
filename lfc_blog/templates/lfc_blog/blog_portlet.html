@@ -26,7 +26,7 @@
                 <ul class="portlet-body">
                     {% for month in months %}
                         <li class="portlet-item">
-                            <a href="{% url lfc_archive page.slug month.number year %}">{{ month.name }} ({{month.amount}})</a>
+                            <a href="{{ page.get_absolute_url }}/archive/{{ month.number }}/{{ year }}">{{ month.name }} ({{month.amount}})</a>
                         </li>
                     {% endfor %}
                 </ul>
@@ -41,8 +41,8 @@
                 <div class="portlet-body tag-cloud">
                     <div class="portlet-item">
                         {% for tag in cloud %}
-                            <a href="{% url lfc_blog_tag_list page.slug tag.name %}" style="font-size:1{{tag.font_size}}px">
-                                {{tag}}</a>
+                            <a href="{{ page.get_absolute_url }}/tag/{{ tag.name }}" style="font-size:1{{ tag.font_size }}px">
+                                {{ tag }}</a>
                         {% endfor %}
                     </div>
                 </div>
