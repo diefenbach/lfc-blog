@@ -77,12 +77,8 @@ class BlogPortlet(Portlet):
             obj = obj.parent
 
         now = datetime.datetime.now()
-
-        entries = BlogEntry.objects.filter(
-            active = True,
-            language__in=("0", translation.get_language()),
-            parent = obj,
-        )[:self.limit]
+        
+        entries = obj.sub_objects.all()[:self.limit]
 
         months = []
         for i in range(12, 0, -1):
