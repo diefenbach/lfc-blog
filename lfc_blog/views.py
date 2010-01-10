@@ -22,19 +22,19 @@ from lfc_blog.models import BlogEntry
 def archive(request, slug, month, year, template_name="lfc_blog/archive.html"):
     """Display blog entries for given month, year and language.
     """
-    blog = traverse_object(request, slug)
-
+    blog = request.META.get("lfc_context")
     entries = blog.sub_objects.all()
 
     return render_to_response(template_name, RequestContext(request, {
         "blog" : blog,
         "month" : _(datetime.date(int(year), int(month), 1).strftime('%B')),
         "year" : year,
-        "entries" : entries
+        "entries" : entries,
+        "lfc_object" : blog,
     }))
 
 def lfc_tagged_object_list(request, slug, tag, template_name="lfc_blog/tag.html"):
-    """
+    """Displays blog entries for the given tag.
     """
     if tag is None:
         raise AttributeError(_('tagged_object_list must be called with a tag.'))
@@ -43,14 +43,15 @@ def lfc_tagged_object_list(request, slug, tag, template_name="lfc_blog/tag.html"
     if tag_instance is None:
         raise Http404(_('No Tag found matching "%s".') % tag)
 
-    blog = traverse_object(request, slug)
+    blog = request.META.get("lfc_context")
 
     queryset = BlogEntry.objects.filter(parent=blog)
     entries = TaggedItem.objects.get_by_model(queryset, tag_instance)
 
     return render_to_response(template_name, RequestContext(request, {
         "slug"    : slug,
-        "blog"   : blog,
+        "blog"    : blog,
         "entries" : entries,
         "tag"     : tag,
+        "lfc_object" : blog,
     }));
