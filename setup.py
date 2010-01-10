@@ -11,7 +11,7 @@ setup(name='lfc-blog',
       description='A simple blog for LFC',
       long_description=README,
       classifiers=[
-          'Development Status :: 5 - Alpha',
+          'Development Status :: 3 - Alpha',
           'Environment :: Web Environment',
           'Framework :: Django',
           'License :: OSI Approved :: BSD License',
