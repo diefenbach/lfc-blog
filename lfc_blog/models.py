@@ -34,11 +34,10 @@ class Blog(BaseContent):
 
 class BlogForm(forms.ModelForm):
     """The add/edit form of the Blog content object
-    """
-    tags = TagField(widget=AutoCompleteTagInput(), required=False)
+    """    
     class Meta:
         model = Blog
-        fields = ("title", "display_title", "slug", "tags", "text")
+        fields = ("title", "display_title", "slug", "description", "text")
 
 class BlogEntry(BaseContent):
     """An entry of an blog
@@ -56,7 +55,7 @@ class BlogEntryForm(forms.ModelForm):
     tags = TagField(widget=AutoCompleteTagInput(), required=False)
     class Meta:
         model = BlogEntry
-        fields = ("title", "slug", "tags", "text")
+        fields = ("title", "display_title", "slug", "description", "text", "tags")
 
 class BlogPortlet(Portlet):
     """A portlet, which displays recent entries, archive and tag cloud.
