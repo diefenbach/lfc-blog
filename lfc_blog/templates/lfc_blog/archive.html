@@ -22,7 +22,7 @@
                     <span>{{ entry.creator.first_name }} {{ entry.creator.last_name }}</span>
                 {% else %}
                     <span>{{ entry.creator.username }}</span>
-                {% endif %}                
+                {% endif %}
                 {% tags_for_object entry as tag_list %}
 
                 {% if tag_list%}
@@ -51,7 +51,7 @@
 
             <div>
                 {{entry.text|safe}}
-            </div>			
+            </div>
         </div>
         <br clear="all" />
 
