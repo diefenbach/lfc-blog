@@ -27,6 +27,10 @@ class Blog(BaseContent):
     """
     text = models.TextField(_(u"Text"), blank=True)
 
+    def get_searchable_text(self):
+        searchable_text = super(Blog, self).get_searchable_text()
+        return searchable_text + " " + self.text
+
     def form(self, **kwargs):
         """Returns the add/edit form of the Blog
         """
@@ -34,7 +38,7 @@ class Blog(BaseContent):
 
 class BlogForm(forms.ModelForm):
     """The add/edit form of the Blog content object
-    """    
+    """
     class Meta:
         model = Blog
         fields = ("title", "display_title", "slug", "description", "text")
@@ -44,11 +48,15 @@ class BlogEntry(BaseContent):
     """
     text = models.TextField(_(u"Text"), blank=True)
 
+    def get_searchable_text(self):
+        searchable_text = super(BlogEntry, self).get_searchable_text()
+        return searchable_text + " " + self.text
+
     def form(self, **kwargs):
         """Returns the add/edit form of the BlogEntry
         """
         return BlogEntryForm(**kwargs)
-    
+
 class BlogEntryForm(forms.ModelForm):
     """The add/edit form of the Blog content object
     """
@@ -76,7 +84,7 @@ class BlogPortlet(Portlet):
             obj = obj.parent
 
         now = datetime.datetime.now()
-        
+
         entries = obj.sub_objects.all()[:self.limit]
 
         months = []
