@@ -18,7 +18,7 @@
                 {% trans 'Posted on' %}
                 {{entry.publication_date|date:"d.m.Y"}}
                 {% trans 'by' %}
-                {% if lfc_object.creator.last_name %}
+                {% if lfc_context.creator.last_name %}
                     <span>{{ entry.creator.first_name }} {{ entry.creator.last_name }}</span>
                 {% else %}
                     <span>{{ entry.creator.username }}</span>

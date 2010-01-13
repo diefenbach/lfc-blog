@@ -30,7 +30,7 @@ def archive(request, slug, month, year, template_name="lfc_blog/archive.html"):
         "month" : _(datetime.date(int(year), int(month), 1).strftime('%B')),
         "year" : year,
         "entries" : entries,
-        "lfc_object" : blog,
+        "lfc_context" : blog,
     }))
 
 def lfc_tagged_object_list(request, slug, tag, template_name="lfc_blog/tag.html"):
@@ -53,5 +53,5 @@ def lfc_tagged_object_list(request, slug, tag, template_name="lfc_blog/tag.html"
         "blog"    : blog,
         "entries" : entries,
         "tag"     : tag,
-        "lfc_object" : blog,
+        "lfc_context" : blog,
     }));

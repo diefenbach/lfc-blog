@@ -8,8 +8,8 @@
 
 {% block comments %}{% endblock %}
 {% block content %}
-    {% if lfc_object.get_title %}
-        <h1 class="first-heading">{{ lfc_object.get_title }}</h1>
+    {% if lfc_context.get_title %}
+        <h1 class="first-heading">{{ lfc_context.get_title }}</h1>
     {% endif %}
 
     {% autopaginate sub_objects %}
@@ -18,7 +18,7 @@
         {% paginate %}
     </div>
         
-    {{ lfc_object.text|safe }}
+    {{ lfc_context.text|safe }}
     
     {% for sub_obj in sub_objects %}
         <div class="blog-entry">
@@ -40,7 +40,7 @@
                 {% if tag_list %}
                     {% trans 'within' %}
                     {% for tag in tag_list %}
-                        <a href="{% url lfc_blog_tag_list lfc_object.slug tag %}">
+                        <a href="{% url lfc_blog_tag_list lfc_context.slug tag %}">
                             {{ tag }}</a>{% if not forloop.last %}, {% endif %}
                     {% endfor %}
                 {% endif %}

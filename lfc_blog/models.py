@@ -77,7 +77,7 @@ class BlogPortlet(Portlet):
         """Renders the portlet as html.
         """
         from lfc_blog.models import BlogEntry
-        obj = context.get("lfc_object")
+        obj = context.get("lfc_context")
 
         # Urgh! Ugly hack.
         if isinstance(obj, BlogEntry):

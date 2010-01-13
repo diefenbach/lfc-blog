@@ -6,55 +6,55 @@
 {% load comments %}
 
 {% block content %}
-    {% if lfc_object.display_title %}
-        <h1 class="blog-entry">{{ lfc_object.title }}</h1>
+    {% if lfc_context.display_title %}
+        <h1 class="blog-entry">{{ lfc_context.title }}</h1>
     {% endif %}
 
     <div class="blog-by-line">
         {% trans 'Posted on' %}
-        {{ lfc_object.publication_date|date:"d.m.Y" }}
+        {{ lfc_context.publication_date|date:"d.m.Y" }}
         {% trans 'by' %}
-        {% if lfc_object.creator.last_name %}
-            <span>{{ lfc_object.creator.first_name }} {{ lfc_object.creator.last_name }}</span>
+        {% if lfc_context.creator.last_name %}
+            <span>{{ lfc_context.creator.first_name }} {{ lfc_context.creator.last_name }}</span>
         {% else %}
-            <span>{{ lfc_object.creator.username }}</span>
+            <span>{{ lfc_context.creator.username }}</span>
         {% endif %}                
-        {% tags_for_object lfc_object as tag_list %}
+        {% tags_for_object lfc_context as tag_list %}
 
         {% if tag_list %}
             {% trans 'within' %}
             {% for tag in tag_list %}
-                <a href="{% url lfc_blog_tag_list lfc_object.parent.slug tag %}">
+                <a href="{% url lfc_blog_tag_list lfc_context.parent.slug tag %}">
                     {{ tag }}</a>{% if not forloop.last %}, {% endif %}
             {% endfor %}
         {% endif %}
 
-        {% get_comment_count for lfc_object as comment_count %}
+        {% get_comment_count for lfc_context as comment_count %}
         |
         {% ifequal comment_count 1  %}
-            <a href="{{ lfc_object.get_absolute_url }}#comments">{% trans 'One comment' %}</a>
+            <a href="{{ lfc_context.get_absolute_url }}#comments">{% trans 'One comment' %}</a>
         {% else %}
-            <a href="{{ lfc_object.get_absolute_url }}#comments">{{comment_count}} {% trans 'comments' %}</a>
+            <a href="{{ lfc_context.get_absolute_url }}#comments">{{comment_count}} {% trans 'comments' %}</a>
         {% endifequal %}
     </div>
 
     <div class="blog-entry">
-        {% if lfc_object.get_image %}
-            <a href="{{ lfc_object.get_image.image.url_600x600 }}"
+        {% if lfc_context.get_image %}
+            <a href="{{ lfc_context.get_image.image.url_600x600 }}"
                class="photo-image"
-               title="{{ lfc_object.get_image.title }}">
+               title="{{ lfc_context.get_image.title }}">
                 <img class="left"
-                     src="{{ lfc_object.get_image.image.url_200x200 }}"
-                     alt="{{ lfc_object.get_image.image.title }}"
-                     title="{{ lfc_object.get_image.image.title }}" />
+                     src="{{ lfc_context.get_image.image.url_200x200 }}"
+                     alt="{{ lfc_context.get_image.image.title }}"
+                     title="{{ lfc_context.get_image.image.title }}" />
             </a>
         {% endif %}
         <div>
-            {{ lfc_object.text|safe }}
+            {{ lfc_context.text|safe }}
         </div>
     </div>
 
     <div class="previous-next-links">
-        {# {% previous_next lfc_object %} #}
+        {# {% previous_next lfc_context %} #}
     </div>
 {% endblock %}
