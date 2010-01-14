@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-13 16:16+0100\n"
+"POT-Creation-Date: 2010-01-13 17:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,14 @@ msgstr ""
 #: models.py:28 models.py:49
 msgid "Text"
 msgstr "Text"
+
+#: models.py:138
+msgid "Blog"
+msgstr "Blog"
+
+#: models.py:139
+msgid "Blog Entry"
+msgstr "Blog Eintrag"
 
 #: views.py:40
 msgid "tagged_object_list must be called with a tag."
