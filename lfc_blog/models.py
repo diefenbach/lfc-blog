@@ -78,6 +78,7 @@ class BlogPortlet(Portlet):
         """
         from lfc_blog.models import BlogEntry
         obj = context.get("lfc_context")
+        request = context.get("request")
 
         # Urgh! Ugly hack.
         if isinstance(obj, BlogEntry):
@@ -85,26 +86,25 @@ class BlogPortlet(Portlet):
 
         now = datetime.datetime.now()
 
-        entries = obj.sub_objects.all()[:self.limit]
+        entries = obj.sub_objects.restricted(request)[:self.limit]
 
         months = []
         for i in range(12, 0, -1):
             month = (now.month+i) % 12
             if month == 0:
                 month = 12
-            pages = BlogEntry.objects.filter(
+            temp = obj.sub_objects.restricted(request).filter(
                 language__in = (translation.get_language(), "0"),
-                active=True,
-                parent=obj,
                 creation_date__month=month)
-            amount = pages.count()
+            amount = temp.count()
             if amount:
                 months.append({
                     "name" : _(datetime.date(now.year, month, 1).strftime('%B')),
                     "amount" : amount,
                     "number" : month,
                 })
-
+        
+        # TODO: Use restricted manager here
         cloud = tagging.models.Tag.objects.cloud_for_model(
             BlogEntry, filters={
                 "parent" : obj,
