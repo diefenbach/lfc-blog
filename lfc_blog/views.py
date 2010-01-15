@@ -33,7 +33,7 @@ def archive(request, slug, month, year, template_name="lfc_blog/archive.html"):
         "lfc_context" : blog,
     }))
 
-def lfc_tagged_object_list(request, slug, tag, template_name="lfc_blog/tag.html"):
+def lfc_tagged_object_list(request, slug, tag, language=None, template_name="lfc_blog/tag.html"):
     """Displays blog entries for the given tag.
     """
     if tag is None:
