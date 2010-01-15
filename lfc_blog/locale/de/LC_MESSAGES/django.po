@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-13 17:12+0100\n"
+"POT-Creation-Date: 2010-01-15 08:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,15 +15,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: models.py:28 models.py:49
+#: models.py:29 models.py:50
 msgid "Text"
 msgstr "Text"
 
-#: models.py:138
+#: models.py:143
 msgid "Blog"
 msgstr "Blog"
 
-#: models.py:139
+#: models.py:144
 msgid "Blog Entry"
 msgstr "Blog Eintrag"
 
