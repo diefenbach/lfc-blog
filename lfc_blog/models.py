@@ -18,7 +18,7 @@ from portlets.utils import register_portlet
 
 # lfc imports
 from lfc.utils.registration import register_content_type
-from lfc.utils.registration import register_sub_type_to
+from lfc.utils.registration import register_sub_type
 from lfc.utils.registration import register_template
 from lfc.fields.autocomplete import AutoCompleteTagInput
 from lfc.models import BaseContent
@@ -140,14 +140,14 @@ def register(sender, **kwargs):
     register_portlet(BlogPortlet, "Blog")
     
     # Register Templates
-    register_template(name = _(u"Blog"), file_name="blog.html")
-    register_template(name = _(u"Blog Entry"), file_name="blog_entry.html")
+    register_template(name = _(u"Blog"), path="lfc/templates/blog.html")
+    register_template(name = _(u"Blog Entry"), path="lfc/templates/blog_entry.html")
 
     # Register objects
-    register_content_type(obj = Blog, name = "Blog", sub_types = ["BlogEntry"], templates=["Blog"], default_template="Blog")
-    register_content_type(obj = BlogEntry, name = "Blog Entry", templates=["Blog Entry"], default_template="Blog Entry")
+    register_content_type(Blog, name = "Blog", sub_types = ["BlogEntry"], templates=["Blog"], default_template="Blog")
+    register_content_type(BlogEntry, name = "Blog Entry", templates=["Blog Entry"], default_template="Blog Entry")
 
     # Register Blog as a sub type of Page
-    register_sub_type_to("Page", obj=Blog)
+    register_sub_type(Blog, "Page")
 
 post_syncdb.connect(register)
