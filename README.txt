@@ -6,6 +6,11 @@ A simple Blog for `LFC <http://pypi.python.org/pypi/django-lfc/>`
 Changes
 =======
 
+1.0 alpha 3 (2010-01-22)
+------------------------
+
+* Some refactoring according to LFC 1.0 alpha 3
+
 1.0 alpha 2 (2010-01-15)
 ------------------------
 
