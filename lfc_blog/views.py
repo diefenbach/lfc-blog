@@ -23,7 +23,7 @@ def archive(request, slug, month, year, template_name="lfc_blog/archive.html"):
     """Display blog entries for given month, year and language.
     """
     blog = request.META.get("lfc_context")
-    entries = blog.sub_objects.all()
+    entries = blog.children.all()
 
     return render_to_response(template_name, RequestContext(request, {
         "blog" : blog,

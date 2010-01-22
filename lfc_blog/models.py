@@ -87,14 +87,14 @@ class BlogPortlet(Portlet):
 
         now = datetime.datetime.now()
 
-        entries = obj.sub_objects.restricted(request)[:self.limit]
+        entries = obj.children.restricted(request)[:self.limit]
 
         months = []
         for i in range(12, 0, -1):
             month = (now.month+i) % 12
             if month == 0:
                 month = 12
-            temp = obj.sub_objects.restricted(request).filter(
+            temp = obj.children.restricted(request).filter(
                 language__in = (translation.get_language(), "0"),
                 creation_date__month=month)
             amount = temp.count()
