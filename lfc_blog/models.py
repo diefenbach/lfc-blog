@@ -131,23 +131,3 @@ class BlogPortletForm(forms.ModelForm):
     """
     class Meta:
         model = BlogPortlet
-
-from django.db.models.signals import post_syncdb
-
-def register(sender, **kwargs):
-
-    # Register Portlets
-    register_portlet(BlogPortlet, "Blog")
-    
-    # Register Templates
-    register_template(name = _(u"Blog"), path="lfc/templates/blog.html")
-    register_template(name = _(u"Blog Entry"), path="lfc/templates/blog_entry.html")
-
-    # Register objects
-    register_content_type(Blog, name = "Blog", sub_types = ["BlogEntry"], templates=["Blog"], default_template="Blog")
-    register_content_type(BlogEntry, name = "Blog Entry", templates=["Blog Entry"], default_template="Blog Entry")
-
-    # Register Blog as a sub type of Page
-    register_sub_type(Blog, "Page")
-
-post_syncdb.connect(register)
