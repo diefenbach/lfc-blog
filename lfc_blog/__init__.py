@@ -17,7 +17,7 @@ from lfc_blog.models import Blog
 from lfc_blog.models import BlogPortlet
 from lfc_blog.models import BlogEntry
 
-name = _(u"LFC Blog")
+name = "Blog"
 description = _(u"A simple blog")
 
 def install():

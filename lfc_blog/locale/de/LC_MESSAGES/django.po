@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-15 08:30+0100\n"
+"POT-Creation-Date: 2010-01-24 21:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,17 +15,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: __init__.py:21
+msgid "A simple blog"
+msgstr "Ein einfacher Blog"
+
 #: models.py:29 models.py:50
 msgid "Text"
 msgstr "Text"
-
-#: models.py:143
-msgid "Blog"
-msgstr "Blog"
-
-#: models.py:144
-msgid "Blog Entry"
-msgstr "Blog Eintrag"
 
 #: views.py:40
 msgid "tagged_object_list must be called with a tag."
@@ -77,3 +73,9 @@ msgstr "Archiv"
 #: templates/lfc_blog/blog_portlet.html:39
 msgid "Topics"
 msgstr "Themen"
+
+#~ msgid "Blog"
+#~ msgstr "Blog"
+
+#~ msgid "Blog Entry"
+#~ msgstr "Blog Eintrag"
