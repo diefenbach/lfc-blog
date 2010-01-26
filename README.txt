@@ -6,6 +6,12 @@ A simple Blog for `LFC <http://pypi.python.org/pypi/django-lfc/>`
 Changes
 =======
 
+1.0 alpha 4 (2010-01-26)
+------------------------
+
+* Moved registration to new install method
+* Updated german translations
+
 1.0 alpha 3 (2010-01-22)
 ------------------------
 
