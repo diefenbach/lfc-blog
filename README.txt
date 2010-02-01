@@ -1,10 +1,15 @@
 What is it?
 ===========
 
-A simple Blog for `LFC <http://pypi.python.org/pypi/django-lfc/>`
+A simple Blog for `LFC <http://pypi.python.org/pypi/django-lfc/>`_
 
 Changes
 =======
+
+1.0 alpha 5 (2010-02-01)
+------------------------
+
+* Added some caching
 
 1.0 alpha 4 (2010-01-26)
 ------------------------
