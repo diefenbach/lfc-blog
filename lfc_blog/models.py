@@ -3,6 +3,7 @@ import datetime
 
 # django imports
 from django import forms
+from django.core.cache import cache
 from django.db import models
 from django.template.loader import render_to_string
 from django.utils import translation
@@ -14,12 +15,8 @@ from tagging.forms import TagField
 
 # portlets imports
 from portlets.models import Portlet
-from portlets.utils import register_portlet
 
 # lfc imports
-from lfc.utils.registration import register_content_type
-from lfc.utils.registration import register_sub_type
-from lfc.utils.registration import register_template
 from lfc.fields.autocomplete import AutoCompleteTagInput
 from lfc.models import BaseContent
 
@@ -77,6 +74,11 @@ class BlogPortlet(Portlet):
     def render(self, context):
         """Renders the portlet as html.
         """
+        cache_key = "portlet-blog"
+        result = cache.get(cache_key)
+        if result:
+            return result
+
         from lfc_blog.models import BlogEntry
         obj = context.get("lfc_context")
         request = context.get("request")
@@ -112,7 +114,7 @@ class BlogPortlet(Portlet):
                 "active" : True,
             })
 
-        return render_to_string("lfc_blog/blog_portlet.html", {
+        result = render_to_string("lfc_blog/blog_portlet.html", {
             "page" : obj,
             "title" : self.title,
             "entries" : entries,
@@ -120,6 +122,9 @@ class BlogPortlet(Portlet):
             "year" : now.year,
             "cloud" : cloud,
         })
+        
+        cache.set(cache_key, result)
+        return result
 
     def form(self, **kwargs):
         """

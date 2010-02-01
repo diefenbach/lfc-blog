@@ -40,6 +40,7 @@ def lfc_tagged_object_list(request, slug, tag, language=None, template_name="lfc
         raise AttributeError(_('tagged_object_list must be called with a tag.'))
 
     tag_instance = get_tag(tag)
+
     if tag_instance is None:
         raise Http404(_('No Tag found matching "%s".') % tag)
 
