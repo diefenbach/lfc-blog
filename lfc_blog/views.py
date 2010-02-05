@@ -23,7 +23,7 @@ def archive(request, slug, month, year, template_name="lfc_blog/archive.html"):
     """Display blog entries for given month, year and language.
     """
     blog = request.META.get("lfc_context")
-    entries = blog.children.all()
+    entries = blog.children.filter(publication_date__month=month)
 
     return render_to_response(template_name, RequestContext(request, {
         "blog" : blog,

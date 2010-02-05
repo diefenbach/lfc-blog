@@ -98,7 +98,7 @@ class BlogPortlet(Portlet):
                 month = 12
             temp = obj.children.restricted(request).filter(
                 language__in = (translation.get_language(), "0"),
-                creation_date__month=month)
+                publication_date__month=month)
             amount = temp.count()
             if amount:
                 months.append({
