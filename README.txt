@@ -6,6 +6,12 @@ A simple Blog for `LFC <http://pypi.python.org/pypi/django-lfc/>`_
 Changes
 =======
 
+1.0 alpha 6 (2010-02-14)
+------------------------
+
+* Bugfix: display archive/tag view when blog is child of another object
+* Blog portlet: display publication date within archive view
+
 1.0 alpha 5 (2010-02-01)
 ------------------------
 
