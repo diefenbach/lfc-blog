@@ -23,7 +23,11 @@ def archive(request, slug, month, year, template_name="lfc_blog/archive.html"):
     """Display blog entries for given month, year and language.
     """
     blog = request.META.get("lfc_context")
-    entries = blog.children.filter(publication_date__month=month)
+
+    entries = []
+    for entry in blog.children.filter(publication_date__month=month):
+        if entry.has_permission(request.user, "view"):
+            entries.append(entry)
 
     return render_to_response(template_name, RequestContext(request, {
         "blog" : blog,
@@ -47,7 +51,11 @@ def lfc_tagged_object_list(request, slug, tag, language=None, template_name="lfc
     blog = request.META.get("lfc_context")
 
     queryset = BlogEntry.objects.filter(parent=blog)
-    entries = TaggedItem.objects.get_by_model(queryset, tag_instance)
+
+    entries = []
+    for entry in TaggedItem.objects.get_by_model(queryset, tag_instance):
+        if entry.has_permission(request.user, "view"):
+            entries.append(entry)
 
     return render_to_response(template_name, RequestContext(request, {
         "slug"    : slug,

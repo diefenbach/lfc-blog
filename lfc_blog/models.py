@@ -17,6 +17,7 @@ from tagging.forms import TagField
 from portlets.models import Portlet
 
 # lfc imports
+import lfc.utils
 from lfc.fields.autocomplete import AutoCompleteTagInput
 from lfc.models import BaseContent
 
@@ -88,30 +89,31 @@ class BlogPortlet(Portlet):
             obj = obj.parent
 
         now = datetime.datetime.now()
-
-        entries = obj.children.restricted(request)[:self.limit]
+        entries = obj.get_children()[:self.limit]
 
         months = []
         for i in range(12, 0, -1):
             month = (now.month+i) % 12
             if month == 0:
                 month = 12
-            temp = obj.children.restricted(request).filter(
+
+            amount = 0
+            for t in obj.children.all().filter(
                 language__in = (translation.get_language(), "0"),
-                publication_date__month=month)
-            amount = temp.count()
+                publication_date__month=month):
+                if t.has_permission(request.user, "view"):
+                    amount += 1
+
             if amount:
                 months.append({
                     "name" : _(datetime.date(now.year, month, 1).strftime('%B')),
                     "amount" : amount,
                     "number" : month,
                 })
-        
-        # TODO: Use restricted manager here
+
         cloud = tagging.models.Tag.objects.cloud_for_model(
-            BlogEntry, filters={
+            BlogEntry, filters = {
                 "parent" : obj,
-                "active" : True,
             })
 
         result = render_to_string("lfc_blog/blog_portlet.html", {
@@ -122,7 +124,7 @@ class BlogPortlet(Portlet):
             "year" : now.year,
             "cloud" : cloud,
         })
-        
+
         cache.set(cache_key, result)
         return result
 

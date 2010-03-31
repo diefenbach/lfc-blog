@@ -31,7 +31,7 @@ def install():
     register_template(name = "Blog Entry", path="lfc/templates/blog_entry.html")
 
     # Register objects
-    register_content_type(BlogEntry, name = "Blog Entry", templates=["Blog Entry"], default_template="Blog Entry")
+    register_content_type(BlogEntry, name = "Blog Entry", templates=["Blog Entry"], default_template="Blog Entry", global_addable=False)
     register_content_type(Blog, name = "Blog", sub_types = ["BlogEntry"], templates=["Blog"], default_template="Blog")
 
     # Register Blog as a sub type of Page
