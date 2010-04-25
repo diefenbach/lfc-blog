@@ -25,7 +25,7 @@ def archive(request, slug, month, year, template_name="lfc_blog/archive.html"):
     blog = request.META.get("lfc_context")
 
     entries = []
-    for entry in blog.children.filter(publication_date__month=month):
+    for entry in blog.get_children(publication_date__month=month):
         if entry.has_permission(request.user, "view"):
             entries.append(entry)
 
