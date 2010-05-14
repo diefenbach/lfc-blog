@@ -10,7 +10,7 @@
     <h1 class="news">{% trans 'Entries for' %} {{ month }} {{ year }}</h1>
 
     {% for entry in entries %}
-        
+
         <div class="blog-entry">
             <h2 class="blog-entry {% if not forloop.first %}heading-middle{% endif %}">
                 <a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a>
@@ -53,6 +53,8 @@
             <div>
                 {{ entry.text|safe }}
             </div>
+
+            {% block comments %}{% endblock %}
         </div>
         <br clear="all" />
 
