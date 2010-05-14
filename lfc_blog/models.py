@@ -91,24 +91,31 @@ class BlogPortlet(Portlet):
         now = datetime.datetime.now()
         entries = obj.get_children()[:self.limit]
 
-        months = []
-        for i in range(12, 0, -1):
-            month = (now.month+i) % 12
-            if month == 0:
-                month = 12
+        years = []
+        for year in range(now.year, now.year-10, -1):
+            months = []
+            for i in range(12, 0, -1):
+                month = (now.month+i) % 12
+                if month == 0:
+                    month = 12
 
-            amount = 0
-            for t in obj.children.all().filter(
-                language__in = (translation.get_language(), "0"),
-                publication_date__month=month):
-                if t.has_permission(request.user, "view"):
-                    amount += 1
+                amount = 0
+                for t in obj.children.all().filter(
+                    language__in = (translation.get_language(), "0"),
+                    publication_date__month=month, publication_date__year=year):
+                    if t.has_permission(request.user, "view"):
+                        amount += 1
 
-            if amount:
-                months.append({
-                    "name" : _(datetime.date(now.year, month, 1).strftime('%B')),
-                    "amount" : amount,
-                    "number" : month,
+                if amount:
+                    months.append({
+                        "name" : _(datetime.date(now.year, month, 1).strftime('%B')),
+                        "amount" : amount,
+                        "number" : month,
+                    })
+            if months:
+                years.append({
+                    "year" : year,
+                    "months" : months
                 })
 
         cloud = tagging.models.Tag.objects.cloud_for_model(
@@ -120,7 +127,7 @@ class BlogPortlet(Portlet):
             "page" : obj,
             "title" : self.title,
             "entries" : entries,
-            "months" : months,
+            "years" : years,
             "year" : now.year,
             "cloud" : cloud,
         })

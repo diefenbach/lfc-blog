@@ -18,20 +18,24 @@
             </ul>
         </div>
 
-        {% if months %}
-            <div class="blog-archive">
-                <div class="portlet-header">
-                    {% trans 'Archive' %}
-                </div>
-                <ul class="portlet-body">
-                    {% for month in months %}
-                        <li class="portlet-item">
-                            <a href="{{ page.get_absolute_url }}/archive/{{ month.number }}/{{ year }}">{{ month.name }} ({{month.amount}})</a>
-                        </li>
-                    {% endfor %}
+        <div class="blog-archive">
+            <div class="portlet-header">
+                {% trans 'Archive' %}
+            </div>        
+            {% for year in years %}
+                <ul>
+                    <li>{{ year.year }}
+                    <ul class="portlet-body">
+                        {% for month in year.months %}
+                            <li class="portlet-item">
+                                <a href="{{ page.get_absolute_url }}/archive/{{ month.number }}/{{ year.year }}">{{ month.name }} ({{ month.amount }})</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    </li>
                 </ul>
-            </div>
-        {% endif %}
+            {% endfor %}
+        </div>
 
         {% if cloud %}
             <div class="blog-tag-cloud">
