@@ -89,7 +89,7 @@ class BlogPortlet(Portlet):
             obj = obj.parent
 
         now = datetime.datetime.now()
-        entries = obj.get_children()[:self.limit]
+        entries = obj.get_children(request)[:self.limit]
 
         years = []
         for year in range(now.year, now.year-10, -1):
