@@ -6,6 +6,13 @@ A simple Blog for `LFC <http://pypi.python.org/pypi/django-lfc/>`_
 Changes
 =======
 
+1.0 beta 1 (2010-05-17)
+-----------------------
+
+* Bugfix: Group blog entries by year and months
+* Bugfix: display entry text within archive view
+* Hide comments for tag and archive view
+
 1.0 alpha 7 (2010-03-31)
 ------------------------
 
