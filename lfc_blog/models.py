@@ -92,7 +92,7 @@ class BlogPortlet(Portlet):
         entries = obj.get_children(request)[:self.limit]
 
         years = []
-        for year in range(now.year, now.year-10, -1):
+        for year in range(now.year, now.year-4, -1):
             months = []
             for i in range(12, 0, -1):
                 month = (now.month+i) % 12
