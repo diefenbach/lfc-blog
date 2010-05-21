@@ -99,12 +99,7 @@ class BlogPortlet(Portlet):
                 if month == 0:
                     month = 12
 
-                amount = 0
-                for t in obj.children.all().filter(
-                    language__in = (translation.get_language(), "0"),
-                    publication_date__month=month, publication_date__year=year):
-                    if t.has_permission(request.user, "view"):
-                        amount += 1
+                amount = len(obj.get_children(request, publication_date__month=month, publication_date__year=year))
 
                 if amount:
                     months.append({
