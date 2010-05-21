@@ -6,6 +6,12 @@ A simple Blog for `LFC <http://pypi.python.org/pypi/django-lfc/>`_
 Changes
 =======
 
+1.0 beta 2 (2010-05-21)
+-----------------------
+
+* Improved caching
+* Added license
+
 1.0 beta 1 (2010-05-17)
 -----------------------
 
