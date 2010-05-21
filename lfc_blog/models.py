@@ -75,14 +75,16 @@ class BlogPortlet(Portlet):
     def render(self, context):
         """Renders the portlet as html.
         """
-        cache_key = "portlet-blog"
+        obj = context.get("lfc_context")
+        request = context.get("request")
+        
+        # CACHE
+        cache_key = "portlet-blog-%s" % request.user.id
         result = cache.get(cache_key)
         if result:
             return result
 
         from lfc_blog.models import BlogEntry
-        obj = context.get("lfc_context")
-        request = context.get("request")
 
         # Urgh! Ugly hack.
         if isinstance(obj, BlogEntry):
