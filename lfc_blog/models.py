@@ -3,10 +3,10 @@ import datetime
 
 # django imports
 from django import forms
+from django.conf import settings
 from django.core.cache import cache
 from django.db import models
 from django.template.loader import render_to_string
-from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 
 # tagging imports
@@ -17,7 +17,6 @@ from tagging.forms import TagField
 from portlets.models import Portlet
 
 # lfc imports
-import lfc.utils
 from lfc.fields.autocomplete import AutoCompleteTagInput
 from lfc.models import BaseContent
 
@@ -79,7 +78,7 @@ class BlogPortlet(Portlet):
         request = context.get("request")
         
         # CACHE
-        cache_key = "portlet-blog-%s" % request.user.id
+        cache_key = "%s-portlet-blog-%s" % (settings.CACHE_MIDDLEWARE_KEY_PREFIX, request.user.id)
         result = cache.get(cache_key)
         if result:
             return result
