@@ -54,11 +54,11 @@
                 {% endifequal %}
             </div>
 
-            {% if sub_obj.get_image %}
+            {% if sub_obj.image %}
                 <img class="left"
-                     src="{{ sub_obj.get_image.image.url_200x200 }}"
-                     alt="{{ sub_obj.get_image.image.title }}"
-                     title="{{ sub_obj.get_image.image.title }}" />
+                     src="{{ sub_obj.image.image.url_200x200 }}"
+                     alt="{{ sub_obj.image.image.title }}"
+                     title="{{ sub_obj.image.image.title }}" />
             {% endif %}
 
             <div>
