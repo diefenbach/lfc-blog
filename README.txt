@@ -6,6 +6,12 @@ A simple Blog for `LFC <http://pypi.python.org/pypi/django-lfc/>`_
 Changes
 =======
 
+1.0 beta 3 (2010-07-07)
+-----------------------
+
+* Changed: Cache keys are using CACHE_MIDDLEWARE_PREFIX now
+* Changed: Using image instead of get_image to prevent unnecessary hits on db
+
 1.0 beta 2 (2010-05-21)
 -----------------------
 
