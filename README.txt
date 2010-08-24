@@ -6,6 +6,11 @@ A simple Blog for `LFC <http://pypi.python.org/pypi/django-lfc/>`_
 Changes
 =======
 
+1.0 beta 3 (2010-08-24)
+-----------------------
+
+* First final release
+
 1.0 beta 3 (2010-07-07)
 -----------------------
 
