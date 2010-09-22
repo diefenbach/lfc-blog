@@ -1,0 +1,23 @@
+h1.blog-entry {
+    font-size: 153.9%;
+    font-weight: bold;
+    padding-bottom: 0px;
+    margin-bottom: 0;
+    border-bottom: 1px solid #24241c;
+}
+
+h2.blog-entry {
+    font-weight: bold;
+    padding-bottom: 0px;
+    border-bottom: 1px solid #24241c;
+}
+
+.blog-by-line {
+    font-size: 85%;
+    margin: 2px 0 10px 0;
+}
+
+.portlet .blog-tag-cloud,
+.portlet .blog-archive {
+    margin-top: 15px;
+}
