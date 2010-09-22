@@ -42,7 +42,7 @@
                 <div class="portlet-header">
                     {% trans 'Topics' %}
                 </div>
-                <div class="portlet-body tag-cloud">
+                <div class="portlet-body blog-tag-cloud">
                     <div class="portlet-item">
                         {% for tag in cloud %}
                             <a href="{{ page.get_absolute_url }}/tag/{{ tag.name }}" style="font-size:1{{ tag.font_size }}px">
