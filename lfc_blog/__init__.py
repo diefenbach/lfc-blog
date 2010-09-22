@@ -7,6 +7,9 @@ from lfc.utils.registration import unregister_content_type
 from lfc.utils.registration import register_sub_type
 from lfc.utils.registration import register_template
 from lfc.utils.registration import unregister_template
+from lfc.utils.registration import register_resource
+from lfc.utils.registration import unregister_resource
+from lfc.utils.registration import CSS
 
 # portlets imports
 from portlets.utils import register_portlet
@@ -18,7 +21,7 @@ from lfc_blog.models import BlogPortlet
 from lfc_blog.models import BlogEntry
 
 name = "Blog"
-description = _(u"A simple blog")
+description = _(u"A simple blog for LFC")
 
 def install():
     """Installs the blog application.
@@ -27,15 +30,18 @@ def install():
     register_portlet(BlogPortlet, "Blog")
 
     # Register Templates
-    register_template(name = "Blog", path="lfc/templates/blog.html")
-    register_template(name = "Blog Entry", path="lfc/templates/blog_entry.html")
+    register_template(name="Blog", path="lfc/templates/blog.html")
+    register_template(name="Blog Entry", path="lfc/templates/blog_entry.html")
 
     # Register objects
-    register_content_type(BlogEntry, name = "Blog Entry", templates=["Blog Entry"], default_template="Blog Entry", global_addable=False)
-    register_content_type(Blog, name = "Blog", sub_types = ["BlogEntry"], templates=["Blog"], default_template="Blog")
+    register_content_type(BlogEntry, name = "Blog Entry", templates=["Blog Entry"], default_template="Blog Entry", global_addable=False, workflow="Portal")
+    register_content_type(Blog, name = "Blog", sub_types = ["BlogEntry"], templates=["Blog"], default_template="Blog", workflow="Portal")
 
     # Register Blog as a sub type of Page
     register_sub_type(Blog, "Page")
+
+    # Register resources
+    register_resource(type=CSS, group="lfc", path="lfc_blog/blog.css")
 
 def uninstall():
     """Uninstalls the blog application.
@@ -50,3 +56,6 @@ def uninstall():
 
     # Unregister portlet
     unregister_portlet(BlogPortlet)
+
+    # Unregister resources
+    unregister_resource(type=CSS, group="lfc", path="lfc_blog/blog.css")
