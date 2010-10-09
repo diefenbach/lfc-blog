@@ -29,7 +29,7 @@ class Blog(BaseContent):
         searchable_text = super(Blog, self).get_searchable_text()
         return searchable_text + " " + self.text
 
-    def form(self, **kwargs):
+    def edit_form(self, **kwargs):
         """Returns the add/edit form of the Blog
         """
         return BlogForm(**kwargs)
@@ -50,8 +50,8 @@ class BlogEntry(BaseContent):
         searchable_text = super(BlogEntry, self).get_searchable_text()
         return searchable_text + " " + self.text
 
-    def form(self, **kwargs):
-        """Returns the add/edit form of the BlogEntry
+    def edit_form(self, **kwargs):
+        """Returns the edit form of the BlogEntry
         """
         return BlogEntryForm(**kwargs)
 

@@ -22,7 +22,7 @@ from lfc_blog.models import BlogEntry
 def archive(request, slug, month, year, template_name="lfc_blog/archive.html"):
     """Display blog entries for given month, year and language.
     """
-    blog = request.META.get("lfc_context")
+    blog = traverse_object(request, slug)
 
     entries = []
     for entry in blog.get_children(publication_date__month=month):
@@ -48,7 +48,7 @@ def lfc_tagged_object_list(request, slug, tag, language=None, template_name="lfc
     if tag_instance is None:
         raise Http404(_('No Tag found matching "%s".') % tag)
 
-    blog = request.META.get("lfc_context")
+    blog = traverse_object(request, slug)
 
     queryset = BlogEntry.objects.filter(parent=blog)
 
