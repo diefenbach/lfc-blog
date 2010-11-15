@@ -19,13 +19,13 @@ from lfc.utils import traverse_object
 from lfc_blog.models import Blog
 from lfc_blog.models import BlogEntry
 
-def archive(request, slug, month, year, template_name="lfc_blog/archive.html"):
+def archive(request, slug, month, year, language=None, template_name="lfc_blog/archive.html"):
     """Display blog entries for given month, year and language.
     """
     blog = traverse_object(request, slug)
 
     entries = []
-    for entry in blog.get_children(publication_date__month=month):
+    for entry in blog.get_children(publication_date__month=month, language__in=("0", language)):
         if entry.has_permission(request.user, "view"):
             entries.append(entry)
 
