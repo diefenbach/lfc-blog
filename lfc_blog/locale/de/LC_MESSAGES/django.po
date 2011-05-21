@@ -74,8 +74,8 @@ msgstr "Archiv"
 msgid "Topics"
 msgstr "Themen"
 
-#~ msgid "Blog"
-#~ msgstr "Blog"
+msgid "Blog"
+msgstr "Blog"
 
-#~ msgid "Blog Entry"
-#~ msgstr "Blog Eintrag"
+msgid "Blog Entry"
+msgstr "Blog Eintrag"
