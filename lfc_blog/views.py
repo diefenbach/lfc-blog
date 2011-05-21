@@ -25,7 +25,7 @@ def archive(request, slug, month, year, language=None, template_name="lfc_blog/a
     blog = traverse_object(request, slug)
 
     entries = []
-    for entry in blog.get_children(publication_date__month=month, language__in=("0", language)):
+    for entry in blog.get_children(publication_date__month=month, publication_date__year = year, language__in=("0", language)):
         if entry.has_permission(request.user, "view"):
             entries.append(entry)
 
