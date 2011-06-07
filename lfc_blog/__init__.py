@@ -58,4 +58,4 @@ def uninstall():
     unregister_portlet(BlogPortlet)
 
     # Unregister resources
-    unregister_resource(type=CSS, group="lfc", path="lfc_blog/blog.css")
+    unregister_resource(path="lfc_blog/blog.css")
