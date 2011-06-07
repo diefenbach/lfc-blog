@@ -2,6 +2,7 @@
 import datetime
 
 # django imports
+from django.conf import settings
 from django.http import Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -16,12 +17,14 @@ from tagging.utils import get_tag
 from lfc.utils import traverse_object
 
 # lfc_blog imports
-from lfc_blog.models import Blog
 from lfc_blog.models import BlogEntry
 
 def archive(request, slug, month, year, language=None, template_name="lfc_blog/archive.html"):
     """Display blog entries for given month, year and language.
     """
+    if language is None:
+        language = getattr(settings, "LANGUAGE_CODE", translation.get_language())
+
     blog = traverse_object(request, slug)
 
     entries = []
