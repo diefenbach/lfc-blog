@@ -30,12 +30,28 @@ def install():
     register_portlet(BlogPortlet, "Blog")
 
     # Register Templates
-    register_template(name="Blog", path="lfc/templates/blog.html")
-    register_template(name="Blog Entry", path="lfc/templates/blog_entry.html")
+    register_template(
+        name="Blog",
+        path="lfc/templates/blog.html")
+
+    register_template(
+        name="Blog Entry",
+        path="lfc/templates/blog_entry.html")
 
     # Register objects
-    register_content_type(BlogEntry, name = "Blog Entry", templates=["Blog Entry"], default_template="Blog Entry", global_addable=False, workflow="Portal")
-    register_content_type(Blog, name = "Blog", sub_types = ["BlogEntry"], templates=["Blog"], default_template="Blog", workflow="Portal")
+    register_content_type(BlogEntry,
+        name = "Blog Entry",
+        templates=["Blog Entry"],
+        default_template="Blog Entry",
+        global_addable=False,
+        workflow="Portal")
+
+    register_content_type(Blog,
+        name="Blog",
+        sub_types=["BlogEntry"],
+        templates=["Blog"],
+        default_template="Blog",
+        workflow="Portal")
 
     # Register Blog as a sub type of Page
     register_sub_type(Blog, "Page")
