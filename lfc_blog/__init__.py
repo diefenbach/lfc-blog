@@ -7,9 +7,6 @@ from lfc.utils.registration import unregister_content_type
 from lfc.utils.registration import register_sub_type
 from lfc.utils.registration import register_template
 from lfc.utils.registration import unregister_template
-from lfc.utils.registration import register_resource
-from lfc.utils.registration import unregister_resource
-from lfc.utils.registration import CSS
 
 # portlets imports
 from portlets.utils import register_portlet
@@ -56,8 +53,6 @@ def install():
     # Register Blog as a sub type of Page
     register_sub_type(Blog, "Page")
 
-    # Register resources
-    register_resource(type=CSS, group="lfc", path="lfc_blog/blog.css")
 
 def uninstall():
     """Uninstalls the blog application.
@@ -72,6 +67,3 @@ def uninstall():
 
     # Unregister portlet
     unregister_portlet(BlogPortlet)
-
-    # Unregister resources
-    unregister_resource(path="lfc_blog/blog.css")
