@@ -29,7 +29,7 @@
                 {% if tag_list%}
                     {% trans 'within' %}
                     {% for tag in tag_list %}
-                        <a href="{% url page_tag_detail entry.slug tag %}">
+                        <a href="{% url 'page_tag_detail' entry.slug tag %}">
                             {{ tag }}</a>{% if not forloop.last %}, {% endif %}
                     {% endfor %}
                 {% endif %}

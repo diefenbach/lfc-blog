@@ -28,7 +28,7 @@
                 {% if tag_list %}
                     {% trans 'within' %}
                     {% for tag in tag_list %}
-                        <a href="{% url lfc_blog_tag_list slug tag %}">
+                        <a href="{% url 'lfc_blog_tag_list' slug tag %}">
                             {{ tag }}</a>{% if not forloop.last %}, {% endif %}
                     {% endfor %}
                 {% endif %}

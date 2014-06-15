@@ -18,13 +18,13 @@
             <span>{{ lfc_context.creator.first_name }} {{ lfc_context.creator.last_name }}</span>
         {% else %}
             <span>{{ lfc_context.creator.username }}</span>
-        {% endif %}                
+        {% endif %}
         {% tags_for_object lfc_context as tag_list %}
 
         {% if tag_list %}
             {% trans 'within' %}
             {% for tag in tag_list %}
-                <a href="{% url lfc_blog_tag_list lfc_context.parent.slug tag %}">
+                <a href="{% url 'lfc_blog_tag_list' lfc_context.parent.slug tag %}">
                     {{ tag }}</a>{% if not forloop.last %}, {% endif %}
             {% endfor %}
         {% endif %}

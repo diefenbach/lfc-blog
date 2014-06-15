@@ -17,9 +17,9 @@
     <div class="pagination-top">
         {% paginate %}
     </div>
-        
+
     {{ lfc_context.text|safe }}
-    
+
     {% for sub_obj in sub_objects %}
         <div class="blog-entry">
             <h2 class="blog-entry"
@@ -34,13 +34,13 @@
                     <span>{{ sub_obj.creator.first_name }} {{ sub_obj.creator.last_name }}</span>
                 {% else %}
                     <span>{{ sub_obj.creator.username }}</span>
-                {% endif %}                
+                {% endif %}
                 {% tags_for_object sub_obj as tag_list %}
 
                 {% if tag_list %}
                     {% trans 'within' %}
                     {% for tag in tag_list %}
-                        <a href="{% url lfc_blog_tag_list lfc_context.slug tag %}">
+                        <a href="{% url 'lfc_blog_tag_list' lfc_context.slug tag %}">
                             {{ tag }}</a>{% if not forloop.last %}, {% endif %}
                     {% endfor %}
                 {% endif %}
